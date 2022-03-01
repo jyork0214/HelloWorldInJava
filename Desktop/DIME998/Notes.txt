@@ -1,0 +1,157 @@
+
+URL:  https://medium.com/@swinkler/git-workflow-explained-a-step-by-step-guide-83c1c9247f03
+
+
+GITHUB REPOSITORY - PERSONAL
+----------------------------
+https://github.com/jyork0214/
+
+
+
+GIT - CHEAT SHEET
+-----------------
+https://education.github.com/git-cheat-sheet-education.pdf
+
+
+GIT - CONFIGURATION
+-------------------
+git config -l
+git config --list
+git config --list --show-origin
+cat /Users/jamesyork/.gitconfig
+git remote get-url origin
+
+
+GIT - USERNAME AND PASSWORD
+---------------------------
+Username:  jyork0214@gmail.com
+Password:  Personal Access Token - This is the password
+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
+
+
+GITHUB REPOSITORY NAME
+----------------------
+HelloWorldInJava.git
+
+
+GITHUB REPOSITORY FOR SPECIFIED APPLICATION
+-------------------------------------------
+https://github.com/jyork0214/HelloWorldInJava.git
+
+
+A GIT CYCLE
+-----------
+1.  CLONE REPOSITORY:  git clone https://github.com/jyork0214/HelloWorldInJava.git
+2.  POINT TO REMOTE REPOSITORY AS TARGET:  git remote add origin https://github.com/jyork0214/HelloWorldInJava.git
+3.  CREATE A NEW LOCAL BRANCH:  git branch -b 22FEB2022
+4.  DO UPDATES ON FILES.
+5.  ADD CURRENT DIRECTORY TO LOCAL REPOSITORY:  git add .
+6.  COMMIT CHANGES TO LOCAL REPOSITORY:  git commit -m "Added MyNotes_22FEB2022.txt"
+7.  PUSH LOCAL REPOSITORY TO REMOTE REPOSITORY:  git push origin 22FEB2022
+8.  DELETE A LOCAL BRANCH:  git branch -d 22FEB2022
+9.  DELETE A REMOTE BRANCH:  git push origin --delete 22FEB2022
+10. SWITCH TO A BRANCH:  git switch 22FEB2022
+11. LIST BRANCHES:  git branch
+12. MERGE BRANCHES:  git switch main
+                     git branch
+                     git merge 22FEB2022
+                     git push
+                     git status
+                     git branch -d 22FEB2022
+                     git push origin --delete 22FEB2022
+
+
+
+
+
+
+CREATE A NEW REPOSITORY
+---------------------------------------------
+echo "# HelloWorldInJava" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/jyork0214/HelloWorldInJava.git
+git push -u origin main
+
+
+PUSH AN EXISTING REPOSITORY
+---------------------------
+git remote add origin https://github.com/jyork0214/HelloWorldInJava.git
+git branch -M main
+git push -u origin main
+
+
+CLONE A RESPOSITORY
+-------------------
+rm -rf HelloWorldInJava
+git clone https://github.com/jyork0214/HelloWorldInJava.git
+git branch
+git checkout -b 22FEB2022
+Git remote add upstream https://github.com/jyork0214/HelloWorldInJava.git
+
+
+CHECKOUT AN EXISTING REPOSITORY
+----------------------------
+git checkout -b [name_of_your_new_branch]
+git push origin [name_of_your_new_branch]
+
+
+
+
+
+
+CLONE A REPOSITORY FROM GITHUB
+------------------------------
+git clone https://github.com/jyork0214/HelloWorldInJava.git
+
+
+GO TO DIRECTORY OF SOURCE CODE AND MODIFY IT (CONTINUE DEVELOPMENT)
+-------------------------------------------------------------------
+cd /Users/jamesyork/Desktop/GitHub/HelloWorldInJava
+    --> do updates to source code.
+        these updates may be Maven, SpringBoot, Docker
+            Java, C#, or other things.
+
+
+ADD CURRENT DIRECTORY CONTENTS TO LOCAL RESPOSITORY
+---------------------------------------------------
+git add .
+
+
+COMMIT ADDITIONS TO LOCAL REPOSITORY  (whereas -m is the comment)
+-----------------------------------------------------------------
+git commit -m "First file construct" 
+
+
+ALL DONE FOR THE DAY SO PUSH LOCAL REPOSITORY BACK TO GITHUB REPOSITORY
+-----------------------------------------------------------------------
+GIT PUSH REPOSITORY BACK TO GITHUB (all done for the day so save changes back to GitHub).
+git push https://jyork0214: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@github.com/jyork0214/HelloWorldInJava.git --all
+
+
+STATUS OF LOCAL RESPOSITORY
+---------------------------
+git status
+
+
+
+GITHUB RECOVERY CODES
+---------------------
+0a057-0ea51
+c4ed3-bea3d
+04343-1fef9
+ff2c1-8ca5f
+9bf72-4bf3f
+471f7-b75c3
+fe822-efba9
+41183-326c7
+39a02-50a1a
+81d7e-2d47f
+6bac4-9ee77
+fcf30-f9198
+9b82c-d4500
+7419e-bb485
+ca53f-dafd6
+cacf7-57580
