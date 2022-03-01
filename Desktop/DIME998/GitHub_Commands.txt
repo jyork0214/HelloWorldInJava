@@ -2,18 +2,18 @@
 URL:  https://stackoverflow.com/questions/14655816/how-to-commit-changes-to-another-pre-existent-branch
 
 
-New Branch Name:  25FEB2022
-git checkout -b 25FEB2022
+New Branch Name:  DIME-998-JEY
+git checkout -b DIME-998-JEY
 git branch -a
-git switch 25FEB2022
+git switch DIME-998-JEY
 ADD FOLDER OR FILES
 FOLDER:  git add .
 FILE:  git add "business/src/main/java/gov/ic/dodiis/dctc/bedrock/client/PDFServiceHandler.java"
 git commit -m "Updated 25FEB2022@1029" 
-git push origin 25FEB2022 
+git push origin DIME-998-JEY 
 
 
-
+git remote add origin 
 
 
 GIT - NEW DAY ACTIONS
@@ -34,7 +34,7 @@ git branch -a
 git switch 25FEB2022
 git add "business/src/main/java/gov/ic/dodiis/dctc/bedrock/client/PDFServiceHandler.java"
 git commit -m "Updated 25FEB2022@1029" 
-git push origin 25FEB2022 
+git push origin 2g5FEB2022 
 
 STEP 10:  Save to remote branch.
 git push origin 25FEB2022 
@@ -54,6 +54,9 @@ git config --list
 git config --list --show-origin
 cat /Users/jamesyork/.gitconfig
 git remote get-url origin
+
+
+
 
 
 
