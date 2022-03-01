@@ -9,8 +9,9 @@ git switch DIME-998-JEY
 ADD FOLDER OR FILES
 FOLDER:  git add .
 FILE:  git add "business/src/main/java/gov/ic/dodiis/dctc/bedrock/client/PDFServiceHandler.java"
-git commit -m "Updated 25FEB2022@1029" 
+git commit -a -m "Updated 01MAR2022@1029" 
 git push origin DIME-998-JEY 
+git remote add origin https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
 
 
 git remote add origin 
