@@ -1,0 +1,85 @@
+URL
+https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
+
+
+Create a Project
+STEP 0. 
+	START.
+
+
+
+
+
+STEP 1.
+	Open terminal and navigate to the root directory of the location to create the project.
+
+
+
+
+
+STEP 2.
+	Project Name:  BasicApp
+	Create a directory having the name of the Project Name.
+
+
+
+
+
+STEP 3. 
+	Navigate to the directory of Step 2.
+
+
+
+
+
+STEP 4. Define the Following.
+                   Group ID:  com.basicapp.app
+                Articact ID:  basicapp
+      Archetype Artifact ID:  maven-archetype-quickstart
+          Archetype Version:  1.0
+
+	Note:  The Artifact ID is the sub-folder name that will be created in the Project Name folder of Step 2.
+
+
+
+
+STEP 5.
+	In the command below, transcribe Step 4 contents into the relative 
+        fields.
+
+	At the command line, run:  
+
+		mvn archetype:generate   -DgroupId=com.basicapp.app   -DartifactId=basicapp   -DarchetypeArtifactId=maven-archetype-quickstart   -DarchetypeVersion=1.0   -DinteractiveMode=false
+
+    Note the above command goes all on one line.
+
+
+
+
+STEP 6.
+	Navigate to the sub-folder created.
+	This sub-folder has the auto-generated files and structure of a Maven app.
+	At the command line, run:  
+
+		mvn package
+
+	Among other things, the above command creates a subdirectory called "target".  In
+	that subdirectory, among other things there is a file called "basicapp-1.0-SNAPSHOT.jar" 
+	which contains the binary of the java application.
+
+
+
+STEP 7. 
+	Test the application.
+	At the command line, run:   
+
+		java -cp target/basicapp-1.0-SNAPSHOT.jar com.basicapp.app.App
+
+	The output shall be:  
+		Hello, the current timestamp is Tue, 8 Mar 2022 15:44:49 -0500
+
+
+
+
+STEP 8.
+	STOP.

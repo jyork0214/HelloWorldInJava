@@ -1,0 +1,101 @@
+# ---------------------------------------------------------
+# Filename:  Dockerfile.txt
+#   Author:  James York
+#     Date:  09MAR2022@0932
+#
+# Docker CLI Commands.
+#     Remove Dangling Images:  docker rmi -f $(docker images -f dangling=true -q)
+# 
+#             View Images:  docker images
+#     Remove Tagged Image:  docker rmi -f odrive-pdf-service-image docker.artifactory.code.dicelab.net/ado/services/odrive-pdf-service:env
+#            Remove Image:  docker rmi -f odrive-pdf-service-image
+#             View Images:  docker images
+#             Build Image:  docker build --progress plain -t odrive-pdf-service-image -f Dockerfile.txt .  
+#               Run Image:  docker run -it odrive-pdf-service-image bash
+#               Tag Image:  docker tag odrive-pdf-service-image docker.artifactory.code.dicelab.net/ado/services/odrive-pdf-service:env
+#             View Images:  docker images
+#            Docker Login:  docker login docker.artifactory.code.dicelab.net
+#              Push Image:  docker image push docker.artifactory.code.dicelab.net/ado/services/odrive-pdf-service:env
+#
+#               Remove Dangling Images:  docker rmi -f $(docker images -f dangling=true -q)
+#     Remove Images by Repository Name:  docker rmi --force $(docker images -q 'odrive-pdf-service-image' | uniq)
+#
+# URLs
+#     Docker
+#          https://devopstuto-docker.readthedocs.io/en/latest/commands/commands.html
+# ---------------------------------------------------------
+
+
+
+
+# STEP 1:  Get the base image this file shall use as a starting point.  The base image has 
+#          a series of subfolders which hold resources of the LINUX operating system.  The
+#          sub-folder structure is listed below:  
+#
+#               bin   dev  home  lib    mnt  proc  run   srv  tmp  var
+#               boot  etc  media  opt  root  sbin  sys  usr
+#
+#          We must use the below image as a base for DiceLab stuff.
+FROM docker.artifactory.code.dicelab.net/ado/common/java-microservice-base:1.0.1-alpine
+
+
+
+
+# STEP 2:  Identify who did this.
+MAINTAINER jyork@celestarcorp.com
+
+
+
+
+# STEP 3:  Create the path where all the application resources shall be located.  In this step, 
+#          our intention is to separate the operating system resources from this application's 
+#          resources.  Hence, the below environment variable creates a sub-directory in the 
+#          operating systems "opt" directory (see above).
+ENV APPLICATION_DIRECTORY=/opt/app
+
+
+
+
+# STEP 4:  Actually create the application directory.  Note that the "-p" switch indicates that
+#          the directory shall be a sub-directory of the current location.  As of this point in 
+#          this docker image file, the current location is still at the operating system root.
+RUN mkdir -p $APPLICATION_DIRECTORY
+
+
+
+
+# STEP 5:  Change the current location to the application's directory.
+WORKDIR $APPLICATION_DIRECTORY
+
+
+
+
+# STEP 6:  We're in the application's directory so now let's just copy the files associated with
+#          the application.  Let's just copy everything over to see what happens and give  DOCKER a  
+#          chance to figure out that which needs to be done.
+COPY odrive-pdf-service/  $APPLICATION_DIRECTORY
+
+
+
+
+# STEP 7:  In order to run the BASH script file, we need to change it's file permissions to 
+#          allow read-execute.  If we do not do this, we shall get a run-time error as below:  
+#
+#            exec: "./service-entrypoint.sh": permission denied
+#
+#          Also note thate 755 permission allows everyone to read and execute AND it ONLY allows 
+#          the owner to write.
+RUN chmod 755 $APPLICATION_DIRECTORY/service-entrypoint.sh
+
+
+
+
+# STEP 8:  Almost done.  Now let's tell the image to load the following script when the image
+#          is instantiated.
+ENTRYPOINT ["/opt/app/service-entrypoint.sh"]
+
+
+
+
+# STEP 9:  We're done.  Call the operating system's console to start the application.
+CMD /bin/sh console

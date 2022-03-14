@@ -1,0 +1,26 @@
+0.  Start.
+1.  Get artifactory respository name.
+    a.  Login to JFrog (Artifactory) at https://artifactory.code.dicelab.net/ui/packages.
+    b.  In that location and on the left-side menu, click:  Artifacts.
+    c.  Follow the path:  docker-->proj-->local-->ado-->services--> <find my service>.
+    d.  Click on the service.
+    e.  On the right-side of the screen, copy the value of Repository Path:
+            docker-proj-local/ado/services/odrive-pdf-service/
+2.  Create tag.
+    a.  Open any text editor.
+    b.  Paste the repository path of Step 1, e.
+            docker-proj-local/ado/services/odrive-pdf-service/
+    c.  In the above respository path, remove the trailing forward slash.
+            docker-proj-local/ado/services/odrive-pdf-service
+append:  :env  ag Image:  docker tag docker-basicapp-image docker.artifactory.code.dicelab.net/ado/apps/odrive-pdf-service
+
+7.  At the end of the repository path, append :env  (a colon and the letters env)
+        docker.artifactory.code.dicelab.net/ado/services/odrive-pdf-service:env
+8.  Tag the image.
+        In terminal, run the command:
+            docker tag docker-basicapp-image docker.artifactory.code.dicelab.net/ado/services/odrive-pdf-service:env
+
+8.  In terminal, run the command:  
+
+        docker image push docker.artifactory.code.dicelab.net/ado/services/odrive-pdf-service:env
+            

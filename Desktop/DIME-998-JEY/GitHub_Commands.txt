@@ -1,0 +1,88 @@
+
+URL:  https://stackoverflow.com/questions/14655816/how-to-commit-changes-to-another-pre-existent-branch
+
+
+git clone --single-branch --branch DIME-998-JEY  https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
+
+
+Branch Name:  DIME-998-JEY
+1.  git checkout -b DIME-998-JEY
+2.  git branch -a
+3.  git switch DIME-998-JEY
+4.  -->DO CRUD ON FOLDER OR FILES
+5.  FOLDER:  git add .
+    FILE:  git add 'business/src/main/java/gov/ic/dodiis/dctc/bedrock/client/PDFServiceHandler.java'
+6.  git commit -a -m 'Updated 01MAR2022@1029'
+7.  git push origin DIME-998-JEY 
+8.  git remote add origin https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
+9.  git remote add upstream https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
+
+
+git remote add origin 
+
+
+GIT - NEW DAY ACTIONS
+STEP 0:  Create new branch.
+Branch Name:  25FEB2022
+
+STEP 1:  Create new branch.
+git checkout -b 25FEB2022
+
+STEP 2.  Clone
+FROM DIME-998-JEY
+git clone https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
+
+
+
+STEP 3.  Commit
+git branch -a
+git switch 25FEB2022
+git add "business/src/main/java/gov/ic/dodiis/dctc/bedrock/client/PDFServiceHandler.java"
+git commit -m "Updated 25FEB2022@1029" 
+git push origin 255FEB2022 
+
+STEP 10:  Save to remote branch.
+git push origin 25FEB2022 
+
+STEP 11:  Remove to remote branch.
+git push origin 25FEB2022 
+
+
+
+
+
+
+GIT - CONFIGURATION
+-------------------
+git config -l
+git config --list
+git config --list --show-origin
+cat /Users/jamesyork/.gitconfig
+git remote get-url origin
+
+
+
+
+
+
+1.  Navigate to:
+https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service/-/tree/master
+
+2.  Create new branch:
+feature_PDF_Service
+
+3.  Repository
+https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
+
+4.  Clone
+git clone https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
+
+git clone --single-branch --branch DIME-998-JEY  https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
+
+
+
+5.  Point to Remote Repository
+git remote add origin https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
+
+git push origin --delete feature_PDF_Service
+

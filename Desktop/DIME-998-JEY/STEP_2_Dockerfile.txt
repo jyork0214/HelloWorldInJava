@@ -1,0 +1,91 @@
+# ---------------------------------------------------------
+# Filename:  Dockerfile_BasicApp.txt
+#   Author:  James York
+#     Date:  08MAR2022@1301
+#
+#     Note:  Copy this file and save it as:  Dockerfile_BasicApp.txt
+#
+# Docker CLI Commands.
+#     Remove Image:  docker rmi -f docker-basicapp-image
+#      View Images:  docker images
+#      Build Image:  docker build --progress plain -t docker-basicapp-image -f Dockerfile_BasicApp.txt .  
+#        Run Image:  docker run -it docker-basicapp-image bash
+#        Tag Image:  docker tag docker-basicapp-image docker.artifactory.code.dicelab.net/ado/apps/odrive-pdf-service
+#     Docker Login:  docker login docker.artifactory.code.dicelab.net
+#       Push Image:  docker image push docker-basicapp-image/odrive-pdf-service docker.artifactory.code.dicelab.net/ado/apps/odrive-pdf-service:dev
+#
+#               Remove Dangling Images:  docker rmi -f $(docker images -f dangling=true -q)
+#     Remove Images by Repository Name:  docker rmi --force $(docker images -q 'docker-basicapp-image' | uniq)
+#
+# URLs
+#     Docker
+#          https://devopstuto-docker.readthedocs.io/en/latest/commands/commands.html
+# ---------------------------------------------------------
+
+
+
+
+
+# STEP 1:  Get the base image this file shall use as a starting point.  The base image has 
+#          a series of subfolders which hold resources of the LINUX operating system.  The
+#          sub-folder structure is listed below:  
+#
+#               bin   dev  home  lib    mnt  proc  run   srv  tmp  var
+#               boot  etc  media  opt  root  sbin  sys  usr
+#
+#          We must use the below image as a base for DiceLab stuff.
+FROM docker.artifactory.code.dicelab.net/ado/common/java-microservice-base:1.0.1-alpine
+#          But, for now, let's just use the basic alpine image.
+#              FROM openjdk:8-alpine
+
+
+
+# STEP 2:  Create the path where all the application resources shall be located.  In this step, 
+#          our intention is to separate the operating system resources from this application's 
+#          resources.  Hence, the below environment variable creates a sub-directory in the 
+#          operating systems "opt" directory (see above).
+ENV APPLICATION_DIRECTORY=/opt/app
+
+
+
+# STEP 3:  Actually create the application directory.  Note that the "-p" switch indicates that
+#          the directory shall be a sub-directory of the current location.  As of this point in 
+#          this docker image file, the current location is still at the operating system root.
+RUN mkdir -p $APPLICATION_DIRECTORY
+
+
+
+# STEP 4:  Change the current location to the application's directory.
+WORKDIR $APPLICATION_DIRECTORY
+
+
+
+# STEP 5:  We're in the application's directory so now let's just copy the files associated with
+#          the application.  In this case, we have our JAR file (from the maven compilation and
+#          packaging) and our BASH script file.  Note the source location of those two files; they
+#          are found in the sub-folder called "basicapp" which is within the folder of this 
+#          dockerfile image. 
+COPY basicapp/target/basicapp-1.0-SNAPSHOT.jar $APPLICATION_DIRECTORY
+COPY basicapp/service-entrypoint.sh            $APPLICATION_DIRECTORY
+
+
+
+# STEP 6:  In order to run the BASH script file, we need to change it's file permissions to 
+#          allow read-execute.  If we do not do this, we shall get a run-time error as below:  
+#
+#            exec: "./service-entrypoint.sh": permission denied
+#
+#          Also note thate 755 permission allows everyone to read and execute AND it ONLY allows 
+#          the owner to write.
+RUN chmod 755 $APPLICATION_DIRECTORY/service-entrypoint.sh
+
+
+
+# STEP 7:  Almost done.  Now let's tell the image to load the following script when the image
+#          is instantiated.
+ENTRYPOINT ["/opt/app/service-entrypoint.sh"]
+
+
+
+# STEP 8:  We're done.  Call the operating system's console to start the application.
+CMD /bin/sh console

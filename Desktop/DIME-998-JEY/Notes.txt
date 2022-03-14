@@ -1,0 +1,14 @@
+
+
+cd /Users/jamesyork/Desktop/DIME-998-JEY
+
+docker login docker.artifactory.code.dicelab.net
+
+cd odrive-pdf-service
+mvn compile
+
+mvn package
+
+// mvn clean install
+
+
