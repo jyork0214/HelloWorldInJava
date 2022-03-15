@@ -1,10 +1,9 @@
 
 
-cd /Users/jamesyork/Desktop/DIME-998-JEY
+cd /Users/jamesyork/Desktop/DIME-998-JEY/odrive-pdf-service
 
 docker login docker.artifactory.code.dicelab.net
 
-cd odrive-pdf-service
 mvn compile
 
 mvn package

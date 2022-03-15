@@ -2,7 +2,26 @@
 URL:  https://stackoverflow.com/questions/14655816/how-to-commit-changes-to-another-pre-existent-branch
 
 
-git clone --single-branch --branch DIME-998-JEY  https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
+Navigate to this folder.
+1.  Open terminal.
+2.  Type:  cd /Users/jamesyork/Desktop/DIME-998-JEY/odrive-pdf-service
+3.  Press ENTER.
+
+
+Set username and email address for GIT COMMIT
+1.  git config --global user.name "james.e.york"
+2.  git config --global user.email "jyork@celestarcorp.com"
+3.  git commit --amend --reset-author
+
+
+Login to Artifactory
+1.  Open terminal.
+2.  Type:  docker login docker.artifactory.code.dicelab.net
+3.  Press ENTER.
+
+
+Get Repository in which to Work
+1.  git clone --single-branch --branch DIME-998-JEY  https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
 
 
 Branch Name:  DIME-998-JEY
@@ -12,10 +31,22 @@ Branch Name:  DIME-998-JEY
 4.  -->DO CRUD ON FOLDER OR FILES
 5.  FOLDER:  git add .
     FILE:  git add 'business/src/main/java/gov/ic/dodiis/dctc/bedrock/client/PDFServiceHandler.java'
-6.  git commit -a -m 'Updated 01MAR2022@1029'
+6.  git commit -m 'Updated 14MAR2022@1117'
 7.  git push origin DIME-998-JEY 
-8.  git remote add origin https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
-9.  git remote add upstream https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
+
+
+
+
+
+
+
+
+
+
+OTHER COMMANDS...
+
+git remote add origin https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
+git remote add upstream https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
 
 
 git remote add origin 

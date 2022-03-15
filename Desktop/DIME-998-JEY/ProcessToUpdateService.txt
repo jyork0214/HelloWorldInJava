@@ -1,0 +1,166 @@
+ALGORITHM:  PROCESS TO UPDATE SERVICE IN DICELABS
+1.  Get Source Code.
+2.  Compile Source Code.
+3.  Create Docker Image.
+4.  Push Compiled Source Code to GitLab.
+5.  Push Compiled Source Code to Artifactory.
+6.  Run Jenkins Pipeline.
+
+
+
+A.  GET SOURCE CODE.
+0.  Start.
+1.  Open terminal.
+2.  Type:  cd /Users/jamesyork/Desktop/DIME-998-JEY/odrive-pdf-service
+3.  Press ENTER.
+4.  Set username and email address.
+    a.  git config --global user.name "james.e.york"
+    b.  git config --global user.email "jyork@celestarcorp.com"
+    c.  git commit --amend --reset-author
+5.  Login to Artifactory
+    a.  Type:  docker login docker.artifactory.code.dicelab.net
+    b.  Press ENTER.
+6.  Get Repository in which to Work
+    a.  Type:  git clone --single-branch --branch DIME-998-JEY  https://gitlab.code.dicelab.net/ado/services/object-drive/odrive-pdf-service.git
+    b.  Press ENTER.
+7.  Ensure you are in the correct branch.
+    a.  Branch Name:  DIME-998-JEY
+    b.  git branch -a
+    c.  git switch DIME-998-JEY
+8.  Add all source code to GIT 
+    a.  Type:  git add .
+    b.  Press ENTER.
+9.  Stop.
+
+
+
+B.  COMPILE SOURCE CODE.
+0.  Start.
+1.  Open terminal.
+2.  Type:  cd /Users/jamesyork/Desktop/DIME-998-JEY/odrive-pdf-service
+3.  Press ENTER.
+4.  Type:  mvn package
+5.  Press ENTER.
+6.  Debug code as needed.
+7.  Stop.
+
+
+
+C.  CREATE DOCKER IMAGE.
+0.  Start.
+1.  Open terminal.
+2.  Type:  cd /Users/jamesyork/Desktop/DIME-998-JEY/odrive-pdf-service
+3.  Press ENTER.
+4.  Remove Dangling Images.
+    a.  Type:  
+    b.  Press ENTER.
+5.  View Images.
+    a.  Type:  docker images
+    b.  Press ENTER.
+6.  Remove Tagged Image.
+    a.  Type:  docker rmi -f odrive-pdf-service-image docker.artifactory.code.dicelab.net/ado/services/odrive-pdf-service:env
+7.  Remove Image.
+    a.  Type:  docker rmi -f odrive-pdf-service-image
+8.  View Images.
+    a.  Type:  docker images
+    b.  Press ENTER.
+9.  Build Image.
+    a.  Type:  docker build --progress plain -t odrive-pdf-service-image -f docker/Dockerfile .  
+    b.  Press ENTER.
+    c.  Debug as necessary.
+10. View Images.
+    a.  Type:  docker images
+    b.  Press ENTER.
+    c.  Verify you see the name and tag of the image.
+        1.  Image ID:  odrive-pdf-service-image
+        2.  Tag:  latest
+11. Run Image (DO NOT DO ON SERVICES).
+    a.  Type:  docker run -it odrive-pdf-service-image bash
+    b.  Press ENTER.
+12. Tag Image.
+    a.  Type:  docker tag odrive-pdf-service-image docker.artifactory.code.dicelab.net/ado/services/odrive-pdf-service:env
+    b.  Press ENTER.
+13. View Images.
+    a.  Type:  docker images
+    b.  Press ENTER.
+    c.  Verify you see the name and tag of the image.
+        1.  Image ID:  docker.artifactory.code.dicelab.net/ado/services/odrive-pdf-service
+        2.  Tag:  env
+13. Stop.
+
+
+
+
+
+D.  PUSH COMPILED SOURCE CODE TO GITLAB.
+0.  Start.
+1.  Open terminal.
+2.  Type:  cd /Users/jamesyork/Desktop/DIME-998-JEY/odrive-pdf-service
+3.  Press ENTER.
+4.  git commit -m 'Updated 15MAR2022@1131'
+5.  git push origin DIME-998-JEY 
+6.  Stop.
+
+
+
+ 
+E.  PUSH COMPILED SOURCE CODE TO ARTIFACTORY.
+0.  Start.
+1.  Open terminal.
+2.  Type:  cd /Users/jamesyork/Desktop/DIME-998-JEY/odrive-pdf-service
+3.  Press ENTER.
+4. Login to Artifactory.
+    a.  docker login docker.artifactory.code.dicelab.net
+    b.  Press ENTER.
+5. Push Image to Artifactory.
+    a.  Type:  docker image push docker.artifactory.code.dicelab.net/ado/services/odrive-pdf-service:env
+    b.  Press ENTER.
+    c.  Annotate Digest.
+        1.  The push shall generate a digest.
+        2.  In this case, the digest is below.
+            a.  sha256:201f1fdf4e92aaba9f2f0750752ba8e523ecb8b1235103be499416ec29ba8ccf
+5. Verify Image Upload to Artifactory.
+    a.  Login to Artifactory.
+        1.  Open Chrome browser (NOT SAFARI)!
+        2.  Navigate to:  https://artifactory.code.dicelab.net/ui/packages
+        3.  Login.
+    b.  On left menu, select:  Artifacts.
+    c.  On the right-side folder structure, navigate to below.
+        1.  docker-proj-local --> ado --> services --> odrive-pdf-service
+    d.  In that folder, verify existence of sub-folder:  ENV
+    e.  Select folder:  ENV
+    f.  On right-side of screen, click:  General.
+        1.  Validate Deployed By:  james.e.york (your username)
+    g.  On right-side of screen, click:  Docker Info.
+        1.  Validate Digest matches that in Step 5,c,2,a.
+        2.  If exists, then success.
+6.  Stop.
+
+
+
+F.  RUN JENKINS PIPELINE.
+0.  Start.
+1.  Open terminal.
+2.  Type:  cd /Users/jamesyork/Desktop/DIME-998-JEY/odrive-pdf-service
+3.  Press ENTER.
+4.  Login to Jenkins.
+    a.  Open Chrome browser (NOT SAFARI)!
+    b.  Navigate to:  https://jenkins.code.dicelab.net/view/all/job/ADO/
+    c.  Login.
+5.  On right-side of screen, scroll and click:  Services.
+6.  On right-side of screen, scroll and click:  odrive-pdf-service.
+    a.  The odrive-pdf-service Jenkins page shall open.
+7.  On right-side of screen and in the "Folder Owners" table, under the "Name" column of the table, click:  odrive-pdf-service.
+8.  On right-side of screen, click on your project branch:  DIME-998-JEY
+9.  Your Jenkins project branch page shall open.
+10. In the left-side menu, click:  Build with Parameters.
+11. Click button:  Build.
+12. Debug.
+    a.  On right-side of screen, scroll to table:  Build History.
+    b.  Find your latest build number.
+    c.  Hover the mouse over the build number and a dropdown arrow shall appear.
+    d.  Click the dropdown arrow and options appear.
+    e.  Select option:  Console.
+13. Review console output.  
+    a.  If errors exist, fix them and GO TO Section B.
+14. Stop.
